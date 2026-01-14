@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Color-Tiles-Solver",
+  "version": "1.0.0",
+  "description": "A basic extension that inspects the Color Tiles game canvas.",
+  "action": {
+    "default_title": "Color Tiles Solver",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ]
+}

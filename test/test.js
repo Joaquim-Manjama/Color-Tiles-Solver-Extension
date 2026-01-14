@@ -1,9 +1,9 @@
-// Gettign DOM elements
+// Getting DOM elements
 const canvas = document.querySelector('canvas');
 const puzzle = document.querySelector('.puzzle-spacer');
 const levelDiv = document.querySelector('.current-level');
 
-const currentLevel = levelDiv ? parseInt(levelDiv.textContent.split(' ')[0]) : 'Level unknown';
+const currentLevel = levelDiv ? parseInt(levelDiv.textContent.split(' ')[0], 10) : 1;
 
 if (!canvas) {
     console.error('No <canvas> element found on the page.');
@@ -34,7 +34,7 @@ const getNumberOfCells = (level) => {
 const BOARD_SIZE = puzzleRect.width;
 const BOARD_X = puzzleRect.left;
 const BOARD_Y = puzzleRect.top;
-const CELLS = getNumberOfCells(currentLevel);
+const CELLS = getNumberOfCells(currentLevel) || 3;
 const cellSize = BOARD_SIZE / CELLS;
 
 const ctx = canvas.getContext('2d');
@@ -43,7 +43,7 @@ let pixels = [];
 console.log('Board X:', BOARD_X, 'Board Y:', BOARD_Y, 'Cell Size:', cellSize);
 
 // map page/client coordinates to canvas pixel coordinates (handles CSS scaling / devicePixelRatio)
-function clientToCanvasCoords(clientX, clientY) {
+function clientToCanvasCoords(canvas, canvasRect, clientX, clientY) {
     const scaleX = canvas.width / canvasRect.width;
     const scaleY = canvas.height / canvasRect.height;
     const cx = Math.round((clientX - canvasRect.left) * scaleX);
@@ -52,7 +52,7 @@ function clientToCanvasCoords(clientX, clientY) {
 }
 
 // sample a small square and average to reduce anti-aliasing / border effects
-function sampleAverage(ctx, cx, cy, size = CELLSS) {
+function sampleAverage(ctx, cx, cy, size = 3) {
     const half = Math.floor(size / 2);
     let r = 0, g = 0, b = 0, count = 0;
     try {
@@ -167,7 +167,7 @@ for (let i = 0; i < CELLS; i++) {
         const clientX = BOARD_X + (j * cellSize) + (cellSize / 2);
         const clientY = BOARD_Y + (i * cellSize) + (cellSize / 2);
         const { x: cx, y: cy } = clientToCanvasCoords(clientX, clientY);
-        const sampled = sampleAverage(ctx, cx, cy, CELLS);
+    const sampled = sampleAverage(ctx, cx, cy, 3);
         if (!sampled) {
             console.log(`cell ${i},${j}: could not sample`);
             pixels.push(null);

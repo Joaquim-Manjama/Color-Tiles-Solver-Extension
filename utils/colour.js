@@ -1,5 +1,5 @@
 // convert RGB to HSL (r,g,b in 0..255) -> {h:0..360, s:0..1, l:0..1}
-function rgbToHsl(r, g, b) {
+const rgbToHsl = (r, g, b) => {
     r /= 255; g /= 255; b /= 255;
     const max = Math.max(r, g, b), min = Math.min(r, g, b);
     let h, s;
@@ -20,7 +20,7 @@ function rgbToHsl(r, g, b) {
 }
 
 // classify into: brown, red, yellow, blue, green, orange, light blue, purple, gray, white
-function classifyColor(input) {
+const classifyColor = (input) => {
     let r, g, b;
     if (Array.isArray(input)) {
         [r, g, b] = input;

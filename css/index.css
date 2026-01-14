@@ -1,0 +1,11 @@
+.extension-container {
+    width: 300px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-items: center;
+    align-items: center;
+    border-radius: 20%;
+    background-color: #f0f0f0;
+}
