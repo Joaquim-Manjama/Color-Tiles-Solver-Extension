@@ -3,6 +3,7 @@ chrome.action.onClicked.addListener((originalTab) => {
 
   const gameUrl = "https://dailygames.discover.google.com/games/color-tiles?immersive=1&hl=en";
 
+  // Open the game in a new background tab
   chrome.tabs.create({ url: gameUrl, active: false }, (newTab) => {
     console.log("Background tab created:", newTab.id);
     
