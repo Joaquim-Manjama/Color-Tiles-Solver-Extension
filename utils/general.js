@@ -14,7 +14,8 @@ const getNumberOfCells = (level) => {
 }
 
 // map page/client coordinates to canvas pixel coordinates (handles CSS scaling / devicePixelRatio)
-const clientToCanvasCoords = (canvas, canvasRect, clientX, clientY) => {
+const clientToCanvasCoords = (canvas, clientX, clientY) => {
+    const canvasRect = canvas.getBoundingClientRect();
     const scaleX = canvas.width / canvasRect.width;
     const scaleY = canvas.height / canvasRect.height;
     const cx = Math.round((clientX - canvasRect.left) * scaleX);

@@ -13,7 +13,6 @@ if (!puzzle) {
 }
 
 const puzzleRect = puzzle.getBoundingClientRect();
-const canvasRect = canvas.getBoundingClientRect();
 
 // Get number of cells based on level
 const getNumberOfCells = (level) => {
@@ -43,7 +42,8 @@ let pixels = [];
 console.log('Board X:', BOARD_X, 'Board Y:', BOARD_Y, 'Cell Size:', cellSize);
 
 // map page/client coordinates to canvas pixel coordinates (handles CSS scaling / devicePixelRatio)
-function clientToCanvasCoords(canvas, canvasRect, clientX, clientY) {
+function clientToCanvasCoords(canvas, clientX, clientY) {
+    const canvasRect = canvas.getBoundingClientRect();
     const scaleX = canvas.width / canvasRect.width;
     const scaleY = canvas.height / canvasRect.height;
     const cx = Math.round((clientX - canvasRect.left) * scaleX);
@@ -167,7 +167,7 @@ for (let i = 0; i < CELLS; i++) {
         const clientX = BOARD_X + (j * cellSize) + (cellSize / 2);
         const clientY = BOARD_Y + (i * cellSize) + (cellSize / 2);
         const { x: cx, y: cy } = clientToCanvasCoords(clientX, clientY);
-    const sampled = sampleAverage(ctx, cx, cy, 3);
+        const sampled = sampleAverage(ctx, cx, cy, 3);
         if (!sampled) {
             console.log(`cell ${i},${j}: could not sample`);
             pixels.push(null);
