@@ -49,7 +49,21 @@ solveButton.addEventListener('click', async () => {
         const movesLeftElement = document.getElementById('moves-left');
         const movesLeft = movesLeftElement ? parseInt(movesLeftElement.textContent, 10) : 0;
 
-       return { "canvas": canvas, "puzzle": puzzle, "currentLevel": currentLevel, "movesLeft": movesLeft };
+        const ctx = canvas?.getContext("2d");
+        const canvasWidth =  canvas?.getBoundingClientRect().width;
+        const canvasHeight =  canvas?.getBoundingClientRect().height;
+        const canvasLeft =  canvas?.getBoundingClientRect().left;
+        const canvasTop =  canvas?.getBoundingClientRect().top;
+        const boardSize = puzzle?.getBoundingClientRect().width; 
+        const boardx = puzzle?.getBoundingClientRect().left;
+        const boardy =  puzzle?.getBoundingClientRect().top;
+
+        const cells = getNumberOfCells(currentLevel);
+        const cellSize = boardSize / cells;
+
+        let pixels = [];
+        
+        return true;
       
       } catch (error) {
         console.error('Error in injected script:', error);
@@ -59,11 +73,7 @@ solveButton.addEventListener('click', async () => {
     }
 
   }, (results) => {
-    
-    console.log('Results from injected script:', results);
-
-    // Important constants
-    const { canvas, puzzle, currentLevel, movesLeft, error } = results[0].result;
+  
   });
 });
 
