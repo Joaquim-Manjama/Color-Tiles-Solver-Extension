@@ -103,5 +103,5 @@ const getColourId = (colour) => {
                     "gray": 7, "white": 8
     }
 
-  return labels[colour] ? labels[colour] : 69;
+  return labels[colour] || labels[colour] === 0 ? labels[colour] : 69;
 }

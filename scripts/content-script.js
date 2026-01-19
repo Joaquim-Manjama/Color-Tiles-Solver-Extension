@@ -52,7 +52,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           board.push(getColourId(label));
         }
       }
-
+      
       sendResponse({success: true, board: board, pixels: pixels, movesLeft: movesLeft}); // Return the board, pixels and movesLeft
     
     } catch (error) {

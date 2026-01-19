@@ -32,7 +32,6 @@ solveButton.addEventListener('click', async () => {
   
   const response = await chrome.tabs.sendMessage(tab.id, {action: 'getBoard'})
 
-
   if (response.success) {
 
     const board = response.board;
@@ -40,6 +39,7 @@ solveButton.addEventListener('click', async () => {
     const movesLeft = response.movesLeft;
 
     console.log('Pixels: ', pixels);
+    console.log('Board: ', board);
     console.log('Moves left: ', movesLeft);
 
   }
