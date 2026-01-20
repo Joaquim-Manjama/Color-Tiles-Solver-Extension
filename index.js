@@ -17,11 +17,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const response = await chrome.tabs.sendMessage(tab.id, { action: 'checkGame' });
 
   if (response.success) {
-    
+
     // Game detected UI update
     description.textContent = 'Game detected! Ready to solve.';
     solveButton.style.display = 'block';
-    openButton.style.display = 'none';  
+    openButton.style.display = 'none';
   }
 
 });
@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 solveButton.addEventListener('click', async () => {
 
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  
-  const response = await chrome.tabs.sendMessage(tab.id, {action: 'getBoard'})
+
+  const response = await chrome.tabs.sendMessage(tab.id, { action: 'getBoard' })
 
   if (response.success) {
 

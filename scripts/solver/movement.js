@@ -1,35 +1,37 @@
 // Move the board in a given direction
-const move = (grid, size, direction) => {
-    
+const move = (grid, direction) => {
+
     switch (direction) {
         case "LEFT":
-            left(grid, size);
+            console.log("Move Left!");
+            left(grid);
             break;
 
         case "UP":
-            up(grid, size);
+            console.log("Move Up!");
+            up(grid);
             break;
 
         case "RIGHT":
-            right(grid, size);
+            console.log("Move Right");
+            right(grid);
             break;
 
         case "DOWN":
-            down(grid, size);
+            console.log("Move Down!");
+            down(grid);
             break;
 
         default:
             break;
     }
 
-    checkMatches();
-
-    if (verbose) display();
+    checkMatches(grid);
 }
 
 // Undo Move
 const undo = (direction) => {
-    
+
     switch (direction) {
         case "LEFT":
             move("RIGHT");
@@ -53,9 +55,10 @@ const undo = (direction) => {
 }
 
 // Move grid left
-const left = (grid, size) => {
+const left = (grid) => {
 
     let space;
+    const size = grid.length;
 
     for (let i = 0; i < size; i++) {
 
@@ -69,7 +72,7 @@ const left = (grid, size) => {
 
                     grid[i][j - 1] = grid[i][j];
                     grid[i][j] = EMPTY;
-                
+
                 } else space = false;
             }
 
@@ -80,23 +83,24 @@ const left = (grid, size) => {
 
 
 // Move grid right
-const right = (grid, size) => {
-    
+const right = (grid) => {
+
     let space;
+    const size = grid.length;
 
     for (let i = 0; i < size; i++) {
-        
+
         space = false;
 
         for (let j = size - 1; j >= 0; j--) {
 
             if (space) {
-                
+
                 if (grid[i][j] != BLOCK) {
 
                     grid[i][j + 1] = grid[i][j];
                     grid[i][j] = EMPTY;
-                
+
                 } else space = false;
             }
 
@@ -106,9 +110,10 @@ const right = (grid, size) => {
 }
 
 // Move grid up
-const up = (grid, size) => {
-    
+const up = (grid) => {
+
     let space;
+    const size = grid.length;
 
     for (let i = 0; i < size; i++) {
         space = false;
@@ -116,12 +121,12 @@ const up = (grid, size) => {
         for (let j = 0; j < size; j++) {
 
             if (space) {
-                
+
                 if (grid[j][i] != BLOCK) {
-                    
+
                     grid[j - 1][i] = grid[j][i];
                     grid[j][i] = EMPTY;
-                
+
                 } else space = false;
             }
 
@@ -131,9 +136,10 @@ const up = (grid, size) => {
 }
 
 // Move grid down
-const down = (grid, size) => {
-    
+const down = (grid) => {
+
     let space;
+    const size = grid.length;
 
     for (let i = 0; i < size; i++) {
         space = false;
@@ -141,12 +147,12 @@ const down = (grid, size) => {
         for (let j = size - 1; j >= 0; j--) {
 
             if (space) {
-                
+
                 if (grid[j][i] != BLOCK) {
-                    
+
                     grid[j + 1][i] = grid[j][i];
                     grid[j][i] = EMPTY;
-                
+
                 } else space = false;
             }
 

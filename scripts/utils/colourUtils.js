@@ -20,7 +20,7 @@ const rgbToHsl = (r, g, b) => {
 
         h *= 60;
     }
-    
+
     return { h, s, l };
 }
 
@@ -35,20 +35,20 @@ const classifyColor = (input) => {
         ({ r, g, b } = input);
 
     } else if (typeof input === 'string') {
-        
+
         // accept '#rrggbb' or 'rgb(r,g,b)'
         if (input[0] === '#') {
             const hex = input.slice(1);
-            
+
             if (hex.length === 3) {
                 r = parseInt(hex[0] + hex[0], 16);
                 g = parseInt(hex[1] + hex[1], 16);
                 b = parseInt(hex[2] + hex[2], 16);
-            
+
             } else {
-                r = parseInt(hex.slice(0,2), 16);
-                g = parseInt(hex.slice(2,4), 16);
-                b = parseInt(hex.slice(4,6), 16);
+                r = parseInt(hex.slice(0, 2), 16);
+                g = parseInt(hex.slice(2, 4), 16);
+                b = parseInt(hex.slice(4, 6), 16);
             }
 
         } else if (input.startsWith('rgb')) {
@@ -57,7 +57,7 @@ const classifyColor = (input) => {
         }
     }
 
-    if ([r,g,b].some(v => v === undefined || Number.isNaN(v))) return 'unknown';
+    if ([r, g, b].some(v => v === undefined || Number.isNaN(v))) return 'unknown';
 
     const { h, s, l } = rgbToHsl(r, g, b);
 
@@ -98,10 +98,11 @@ const classifyColor = (input) => {
 
 // Get colour id
 const getColourId = (colour) => {
-  const labels = {  "green": -1, "brown": 0, "red": 1, "yellow": 2, 
-                    "blue": 3, "orange": 4, "light blue": 5, "purple": 6, 
-                    "gray": 7, "white": 8
+    const labels = {
+        "green": -1, "brown": 0, "red": 1, "yellow": 2,
+        "blue": 3, "orange": 4, "light blue": 5, "purple": 6,
+        "gray": 7, "white": 8
     }
 
-  return labels[colour] || labels[colour] === 0 ? labels[colour] : 69;
+    return labels[colour] || labels[colour] === 0 ? labels[colour] : 69;
 }

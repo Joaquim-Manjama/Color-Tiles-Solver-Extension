@@ -7,7 +7,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     const game = document.querySelector('color-tiles')
 
     canvas && game ? sendResponse({ success: true, message: 'Game found' }) : sendResponse({ success: false, error: 'Game not found' });
-  }  
+  }
 
   if (request.action == 'getBoard') {
 
@@ -22,9 +22,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
       const canvasRect = canvas?.getBoundingClientRect();
       const ctx = canvas?.getContext("2d", { willReadFrequently: true });
-      const boardSize = puzzle?.getBoundingClientRect().width; 
+      const boardSize = puzzle?.getBoundingClientRect().width;
       const boardx = puzzle?.getBoundingClientRect().left;
-      const boardy =  puzzle?.getBoundingClientRect().top;
+      const boardy = puzzle?.getBoundingClientRect().top;
 
       const cells = getNumberOfCells(currentLevel);
       const cellSize = boardSize / cells;
@@ -34,7 +34,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
       // iterate board cells, sample and classify
       for (let i = 0; i < cells; i++) {
-        
+
         for (let j = 0; j < cells; j++) {
           const clientX = boardx + (j * cellSize) + (cellSize / 2);
           const clientY = boardy + (i * cellSize) + (cellSize / 2);
@@ -52,14 +52,20 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           board.push(getColourId(label));
         }
       }
-      
-      sendResponse({success: true, board: board, pixels: pixels, movesLeft: movesLeft}); // Return the board, pixels and movesLeft
-    
+
+      let grid = makeGrid(board);
+
+      move(grid, "UP");
+      move(grid, "UP");
+
+      console.log("Grid: ", grid);
+
+      sendResponse({ success: true, board: board, pixels: pixels, movesLeft: movesLeft }); // Return the board, pixels and movesLeft
+
     } catch (error) {
       console.error('Error in getting elements:', error);
-      sendResponse({success: false}); // Failed
+      sendResponse({ success: false }); // Failed
     }
-
   }
 
   return true; // Keep message channel open for async response

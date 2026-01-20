@@ -3,7 +3,10 @@
   "name": "Color Tiles Solver",
   "version": "1.0",
   "description": "Solves Google Color Tiles puzzles",
-  "permissions": ["activeTab", "scripting"],
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
   "host_permissions": [
     "https://www.google.com/*",
     "https://dailygames.discover.google.com/*"
@@ -14,12 +17,17 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://dailygames.discover.google.com/*"],
-      "js": [ 
-              "scripts/utils/canvasUtils.js", 
-              "scripts/utils/colourUtils.js", 
-              "scripts/content-script.js"
-            ],
+      "matches": [
+        "https://dailygames.discover.google.com/*"
+      ],
+      "js": [
+        "scripts/solver/position.js",
+        "scripts/solver/grid.js",
+        "scripts/solver/movement.js",
+        "scripts/utils/canvasUtils.js",
+        "scripts/utils/colourUtils.js",
+        "scripts/content-script.js"
+      ],
       "run_at": "document_idle"
     }
   ]
