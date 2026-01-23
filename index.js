@@ -8,7 +8,6 @@ const solutionText = document.getElementById('solutionText');
 
 // Initial UI state
 solveButton.style.display = 'none';
-solutionContainer.style.display = 'none';
 
 // Check if game is present on page after DOM is loaded
 document.addEventListener('DOMContentLoaded', async () => {
