@@ -5,10 +5,9 @@ const rgbToHsl = (r, g, b) => {
     let h, s;
     const l = (max + min) / 2;
 
-    if (max === min) {
-        h = s = 0; // achromatic
+    if (max === min) h = s = 0; // achromatic
 
-    } else {
+    else {
         const d = max - min;
         s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
 
@@ -28,13 +27,11 @@ const rgbToHsl = (r, g, b) => {
 const classifyColor = (input) => {
     let r, g, b;
 
-    if (Array.isArray(input)) {
-        [r, g, b] = input;
+    if (Array.isArray(input)) [r, g, b] = input;
 
-    } else if (typeof input === 'object' && input !== null) {
-        ({ r, g, b } = input);
+    else if (typeof input === 'object' && input !== null) ({ r, g, b } = input);
 
-    } else if (typeof input === 'string') {
+    else if (typeof input === 'string') {
 
         // accept '#rrggbb' or 'rgb(r,g,b)'
         if (input[0] === '#') {
@@ -103,6 +100,5 @@ const getColourId = (colour) => {
         "blue": 3, "orange": 4, "light blue": 5, "purple": 6,
         "gray": 7, "white": 8
     }
-
     return labels[colour] || labels[colour] === 0 ? labels[colour] : 69;
 }

@@ -26,18 +26,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 });
 
+// Tell content-script to get board and try solve it
 solveButton.addEventListener('click', async () => {
 
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
   const response = await chrome.tabs.sendMessage(tab.id, { action: 'getBoard' })
 
-  if (response.success) {
+  response.success ? window.close() : solutionText.textContent = "Could not find a solution for number of moves remaining! :(";
 
-    const solution = response.solution;
-
-    solutionContainer.style.display = 'block';
-    solutionText.textContent = solution.toString().replaceAll(",", ", ");
-
-  }
 });

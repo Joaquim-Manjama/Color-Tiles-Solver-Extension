@@ -1,3 +1,4 @@
+// Convert 1D board into 2D grid
 const makeGrid = (grid) => {
 
     const size = Math.sqrt(grid.length);
@@ -16,6 +17,7 @@ const makeGrid = (grid) => {
     return board;
 }
 
+// Get the number of tiles of each colour
 const getColoursCopy = (grid) => {
 
     const coloursMap = new Map();
@@ -37,22 +39,24 @@ const getColoursCopy = (grid) => {
     return Array.from(coloursMap.entries());
 }
 
+// Check if there is a matched ground of tiles
 const checkMatches = (grid) => {
 
     const coloursInGrid = getColoursCopy(grid);
     let deleted = false;
 
     for (const [colour, count] of coloursInGrid) {
+
         if (colour > 0) {
-            if (match(colour, count, grid)){
-                deleted = true;
-            }
+
+            if (match(colour, count, grid)) deleted = true;
         }
     }
 
     return deleted;
 }
 
+// Match tiles
 const match = (colour, count, grid) => {
     let matchCount = count;
     const queue = [];
@@ -66,12 +70,15 @@ const match = (colour, count, grid) => {
 
     // Find the first node of the given colour
     for (nodeRow = 0; nodeRow < size; nodeRow++) {
+
         for (nodeColumn = 0; nodeColumn < size; nodeColumn++) {
+
             if (grid[nodeRow][nodeColumn] === colour) {
                 found = true;
                 break;
             }
         }
+
         if (found) break;
     }
 
@@ -92,6 +99,7 @@ const match = (colour, count, grid) => {
             );
 
             if (isValid(possiblePosition, size) && !positionVisited(possiblePosition, visited)) {
+
                 if (grid[possiblePosition.row][possiblePosition.column] === colour) {
                     queue.push(possiblePosition);
                     visited.push(possiblePosition);
@@ -109,6 +117,7 @@ const match = (colour, count, grid) => {
     return false;
 }
 
+// Delete matched tiles
 const deleteMatch = (colour, startingPos, grid) => {
     const queue = [startingPos];
     const rowDirections = [0, -1, 0, 1];
@@ -126,6 +135,7 @@ const deleteMatch = (colour, startingPos, grid) => {
             );
 
             if (isValid(possiblePosition, size)) {
+
                 if (grid[possiblePosition.row][possiblePosition.column] === colour) {
                     queue.push(possiblePosition);
                 }
@@ -134,15 +144,18 @@ const deleteMatch = (colour, startingPos, grid) => {
     }
 }
 
+// Check if posision has been visited
 const positionVisited = (position, positions) => {
     return positions.some(p => p.equals(position));
 }
 
+// Check if position is valid
 const isValid = (position, size) => {
     return position.row >= 0 && position.row < size &&
         position.column >= 0 && position.column < size;
 }
 
+// Check if the game has been won
 const gameWon = (grid) => {
 
     const size = grid.length;
@@ -151,18 +164,18 @@ const gameWon = (grid) => {
 
         for (let j = 0; j < size; j++) {
 
-            if (grid[i][j] !== 0 && grid[i][j] !== -1) {
-                return false;
-            }
+            if (grid[i][j] !== 0 && grid[i][j] !== -1) return false;
         }
     }
     return true;
 }
 
+// Copy grid
 const copy = (grid) => {
     return grid.map(row => [...row]);
 }
 
+// Generate unique hash for grid
 const hash = (grid) => {
     // FNV-1a 64-bit constants
     let h = 1469598103934665603n;
@@ -172,6 +185,7 @@ const hash = (grid) => {
     const cols = grid[0].length;
 
     for (let i = 0; i < rows; i++) {
+
         for (let j = 0; j < cols; j++) {
             const v = BigInt(grid[i][j] + 128);
             h ^= v;

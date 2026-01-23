@@ -34,8 +34,9 @@ const sampleAverage = (ctx, cx, cy, size = 3) => {
             for (let dy = -half; dy <= half; dy++) {
                 const sx = cx + dx;
                 const sy = cy + dy;
-                
+
                 if (sx < 0 || sy < 0 || sx >= ctx.canvas.width || sy >= ctx.canvas.height) continue;
+
                 const d = ctx.getImageData(sx, sy, 1, 1).data;
                 r += d[0];
                 g += d[1];
@@ -50,5 +51,49 @@ const sampleAverage = (ctx, cx, cy, size = 3) => {
     }
 
     if (count === 0) return null;
-    return [ Math.round(r / count), Math.round(g / count), Math.round(b / count) ];
+    return [Math.round(r / count), Math.round(g / count), Math.round(b / count)];
+}
+
+// Close Solution
+const closeSolution = () => {
+    // Remove any existing solution overlay
+    const existing = document.getElementById('puzzle-solver-overlay');
+    if (existing) existing.remove();
+}
+
+// Display Solution
+const displaySolution = (solution) => {
+
+    closeSolution();
+
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.id = 'puzzle-solver-overlay';
+    overlay.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 10000;
+    max-width: 300px;
+    font-family: monospace;
+    `;
+
+    overlay.innerHTML = `
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <strong>Solution:</strong>
+        <button id="close-solution" style="background: red; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">✕</button>
+    </div>
+    <div>${solution}</div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    // Close button
+    document.getElementById('close-solution').addEventListener('click', () => {
+        overlay.remove();
+    });
 }

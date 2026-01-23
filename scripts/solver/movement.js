@@ -61,7 +61,6 @@ const left = (grid) => {
     const size = grid.length;
 
     for (let i = 0; i < size; i++) {
-
         space = false;
 
         for (let j = 0; j < size; j++) {
@@ -69,7 +68,6 @@ const left = (grid) => {
             if (space) {
 
                 if (grid[i][j] != BLOCK) {
-
                     grid[i][j - 1] = grid[i][j];
                     grid[i][j] = EMPTY;
 
@@ -89,7 +87,6 @@ const right = (grid) => {
     const size = grid.length;
 
     for (let i = 0; i < size; i++) {
-
         space = false;
 
         for (let j = size - 1; j >= 0; j--) {
@@ -97,7 +94,6 @@ const right = (grid) => {
             if (space) {
 
                 if (grid[i][j] != BLOCK) {
-
                     grid[i][j + 1] = grid[i][j];
                     grid[i][j] = EMPTY;
 
@@ -123,7 +119,6 @@ const up = (grid) => {
             if (space) {
 
                 if (grid[j][i] != BLOCK) {
-
                     grid[j - 1][i] = grid[j][i];
                     grid[j][i] = EMPTY;
 
@@ -149,7 +144,6 @@ const down = (grid) => {
             if (space) {
 
                 if (grid[j][i] != BLOCK) {
-
                     grid[j + 1][i] = grid[j][i];
                     grid[j][i] = EMPTY;
 

@@ -1,5 +1,9 @@
 // Listen for messages from index.js
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+
+  // Close solution overlay if opened
+  closeSolution();
+
   if (request.action === 'checkGame') {
 
     // Try to get canvas
@@ -13,6 +17,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     try {
       // Get the Game elements
+      const body = document.body;
       const canvas = document.querySelector('canvas');
       const puzzle = document.querySelector('.puzzle-spacer');
       const levelDiv = document.querySelector('.current-level');
@@ -53,23 +58,28 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         }
       }
 
+      // Convert the board into a 2x2 grid
       let grid = makeGrid(board);
 
       let solution = [];
 
+      // Solve the grid
       try {
         solution = solve(grid, movesLeft);
+
       } catch (error) {
         console.error("Error solving the puzzle! :(", error);
       }
 
-      sendResponse({ success: true, solution: solution }); // Return the board, pixels and movesLeftff
+      // Inject solution
+      if (solution.length) displaySolution(solution.toString().replaceAll(",", ", "));
+
+      sendResponse({ success: (solution.length > 0) }); // Return response to index.js
 
     } catch (error) {
       console.error('Error in getting elements:', error);
       sendResponse({ success: false }); // Failed
     }
   }
-
   return true; // Keep message channel open for async response
 });
