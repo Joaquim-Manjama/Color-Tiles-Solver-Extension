@@ -34,13 +34,10 @@ solveButton.addEventListener('click', async () => {
 
   if (response.success) {
 
-    const board = response.board;
-    const pixels = response.pixels;
-    const movesLeft = response.movesLeft;
+    const solution = response.solution;
 
-    console.log('Pixels: ', pixels);
-    console.log('Board: ', board);
-    console.log('Moves left: ', movesLeft);
+    solutionContainer.style.display = 'block';
+    solutionText.textContent = solution.toString().replaceAll(",", ", ");
 
   }
 });

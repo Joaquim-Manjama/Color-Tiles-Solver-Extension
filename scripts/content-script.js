@@ -55,12 +55,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
       let grid = makeGrid(board);
 
-      move(grid, "UP");
-      move(grid, "UP");
+      let solution = [];
 
-      console.log("Grid: ", grid);
+      try {
+        solution = solve(grid, movesLeft);
+      } catch (error) {
+        console.error("Error solving the puzzle! :(", error);
+      }
 
-      sendResponse({ success: true, board: board, pixels: pixels, movesLeft: movesLeft }); // Return the board, pixels and movesLeft
+      sendResponse({ success: true, solution: solution }); // Return the board, pixels and movesLeftff
 
     } catch (error) {
       console.error('Error in getting elements:', error);

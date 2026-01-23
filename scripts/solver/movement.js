@@ -26,7 +26,7 @@ const move = (grid, direction) => {
             break;
     }
 
-    checkMatches(grid);
+    return checkMatches(grid);
 }
 
 // Undo Move

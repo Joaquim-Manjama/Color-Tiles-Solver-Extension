@@ -40,12 +40,17 @@ const getColoursCopy = (grid) => {
 const checkMatches = (grid) => {
 
     const coloursInGrid = getColoursCopy(grid);
+    let deleted = false;
 
     for (const [colour, count] of coloursInGrid) {
         if (colour > 0) {
-            match(colour, count, grid);
+            if (match(colour, count, grid)){
+                deleted = true;
+            }
         }
     }
+
+    return deleted;
 }
 
 const match = (colour, count, grid) => {
@@ -98,7 +103,10 @@ const match = (colour, count, grid) => {
 
     if (matchCount === 0) {
         deleteMatch(colour, position, grid);
+        return true;
     }
+
+    return false;
 }
 
 const deleteMatch = (colour, startingPos, grid) => {
@@ -155,16 +163,26 @@ const copy = (grid) => {
     return grid.map(row => [...row]);
 }
 
-const serialize = (grid) => {
-    let result = '';
-    const size = grid.length;
+const hash = (grid) => {
+    // FNV-1a 64-bit constants
+    let h = 1469598103934665603n;
+    const prime = 1099511628211n;
 
-    for (let i = 0; i < size; i++) {
+    const rows = grid.length;
+    const cols = grid[0].length;
 
-        for (let j = 0; j < size; j++) {
-            result += grid[i][j] + ',';
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            const v = BigInt(grid[i][j] + 128);
+            h ^= v;
+            h *= prime;
         }
-        result += ';';
     }
-    return result;
+
+    // Mix in number of colours for extra entropy
+    h ^= BigInt(getColoursCopy(grid).length);
+    h *= prime;
+
+    // Return as string (safe + fast for Set/Map keys)
+    return h.toString();
 }
