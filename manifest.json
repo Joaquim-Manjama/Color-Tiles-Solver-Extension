@@ -25,6 +25,7 @@
         "scripts/solver/grid.js",
         "scripts/solver/movement.js",
         "scripts/solver/solve.js",
+        "scripts/utils/solverUtils.js",
         "scripts/utils/canvasUtils.js",
         "scripts/utils/colourUtils.js",
         "scripts/content-script.js"

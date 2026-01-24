@@ -66,6 +66,9 @@ const classifyColor = (input) => {
     // Red: (5-10, 56-68, 45-54)
     if (h >= 0 && h <= 20 && s >= 0.46 && s <= 0.78 && l >= 0.35 && l <= 0.64) return 'red';
 
+    // Orange: (30-38, 96-100, 30-47)
+    if (h >= 25 && h <= 43 && s >= 0.91 && s <= 1.0 && l >= 0.25 && l <= 0.52) return 'orange';
+
     // Yellow: (39-44, 85-100, 46-67)
     if (h >= 31 && h <= 54 && s >= 0.75 && s <= 1.0 && l >= 0.36 && l <= 0.77) return 'yellow';
 
@@ -74,9 +77,6 @@ const classifyColor = (input) => {
 
     // Green: (56-67, 44-60, 36-46)
     if (h >= 51 && h <= 72 && s >= 0.39 && s <= 0.65 && l >= 0.31 && l <= 0.51) return 'green';
-
-    // Orange: (30-38, 96-100, 30-47)
-    if (h >= 25 && h <= 43 && s >= 0.91 && s <= 1.0 && l >= 0.25 && l <= 0.52) return 'orange';
 
     // Light Blue: (171-179, 49-100, 29-60)
     if (h >= 164 && h <= 184 && s >= 0.44 && s <= 1.0 && l >= 0.24 && l <= 0.65) return 'light blue';

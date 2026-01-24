@@ -4,7 +4,7 @@ const getNumberOfCells = (level) => {
     if (typeof level !== 'number') return;
 
     if (level >= 14) return 9;
-    if (level >= 13) return 8;
+    if (level >= 12) return 8;
     if (level >= 10) return 7;
     if (level >= 8) return 6;
     if (level >= 6) return 5;
@@ -62,7 +62,7 @@ const closeSolution = () => {
 }
 
 // Display Solution
-const displaySolution = (solution) => {
+const displaySolution = (solution, pixels) => {
 
     closeSolution();
 
@@ -83,11 +83,15 @@ const displaySolution = (solution) => {
     `;
 
     overlay.innerHTML = `
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; user-select: none;">
         <strong>Solution:</strong>
         <button id="close-solution" style="background: red; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">✕</button>
     </div>
     <div>${solution}</div>
+    <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; margin-top: 10px;">
+        <button id="solve-puzzle" style="background: #4CAF50; color: whitesmoke; border-radius: 10px; padding: 10px 20px; cursor: pointer; margin: auto;">Solve Puzzle</button>
+        <div style="padding: 10px;">${pixels}</div>
+    </div>
     `;
 
     document.body.appendChild(overlay);
@@ -95,5 +99,13 @@ const displaySolution = (solution) => {
     // Close button
     document.getElementById('close-solution').addEventListener('click', () => {
         overlay.remove();
+    });
+
+    // Solve button
+    document.getElementById('solve-puzzle').addEventListener('click', () => {
+        
+        const solution = solvePuzzle();
+
+        displaySolution(solution[0].toString().replaceAll(",", ", "), solution[1].toString().replaceAll(",", ", "));
     });
 }

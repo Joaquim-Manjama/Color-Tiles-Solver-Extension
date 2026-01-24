@@ -3,8 +3,8 @@ const description = document.getElementById('description');
 const openButton = document.getElementById('openBtn');
 const solveButton = document.getElementById('solveBtn');
 const status = document.getElementById('status');
-const solutionContainer = document.getElementById('solution');
-const solutionText = document.getElementById('solutionText');
+const errorContainer = document.getElementById('error');
+const errorText = document.getElementById('errorText');
 
 // Initial UI state
 solveButton.style.display = 'none';
@@ -32,6 +32,6 @@ solveButton.addEventListener('click', async () => {
 
   const response = await chrome.tabs.sendMessage(tab.id, { action: 'getBoard' })
 
-  response.success ? window.close() : solutionText.textContent = "Could not find a solution for number of moves remaining! :(";
+  response.success ? window.close() : errorText.textContent = "Could not find a solution for number of moves remaining! :(";
 
 });
