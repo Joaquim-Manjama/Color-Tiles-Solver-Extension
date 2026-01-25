@@ -62,7 +62,7 @@ const closeSolution = () => {
 }
 
 // Display Solution
-const displaySolution = (solution, pixels) => {
+const displaySolution = (solution) => {
 
     closeSolution();
 
@@ -90,7 +90,6 @@ const displaySolution = (solution, pixels) => {
     <div>${solution}</div>
     <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; margin-top: 10px;">
         <button id="solve-puzzle" style="background: #4CAF50; color: whitesmoke; border-radius: 10px; padding: 10px 20px; cursor: pointer; margin: auto;">Solve Puzzle</button>
-        <div style="padding: 10px;">${pixels}</div>
     </div>
     `;
 
@@ -103,9 +102,9 @@ const displaySolution = (solution, pixels) => {
 
     // Solve button
     document.getElementById('solve-puzzle').addEventListener('click', () => {
-        
+
         const solution = solvePuzzle();
 
-        displaySolution(solution[0].toString().replaceAll(",", ", "), solution[1].toString().replaceAll(",", ", "));
+        displaySolution(solution);
     });
 }

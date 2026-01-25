@@ -1,1 +1,2 @@
-- White colour sometimes not detected
+- Test colour detection
+- Improve error handling and display

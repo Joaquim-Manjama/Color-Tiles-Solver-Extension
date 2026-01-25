@@ -85,12 +85,10 @@ const classifyColor = (input) => {
     if (h >= 259 && h <= 293 && s >= 0.40 && s <= 0.78 && l >= 0.38 && l <= 0.72) return 'purple';
 
     // Gray: (228-330, 1-6, 30-53)
-    if (h >= 223 && h <= 335 && s >= 0.01 && s <= 0.11 && l >= 0.25 && l <= 0.58) return 'gray';
+    if (h >= 213 && h <= 345 && s >= 0.01 && s <= 0.11 && l >= 0.25 && l <= 0.58) return 'gray';
 
     // White: (235-300, 2-33, 65-95)
-    if (h >= 230 && h <= 305 && s >= 0.02 && s <= 0.38 && l >= 0.60 && l <= 1.0) return 'white';
-
-    return 'unknown';
+    return 'white';
 }
 
 // Get colour id

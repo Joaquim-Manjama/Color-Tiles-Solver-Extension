@@ -16,13 +16,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action == 'getBoard') {
 
     try {
-      
+
       const solution = solvePuzzle();
 
       // Inject solution
-      if (solution[0].length) displaySolution(solution[0].toString().replaceAll(",", ", "), solution[1].toString().replaceAll(",", ", "));
+      if (solution.length) displaySolution(solution);
 
-      sendResponse({ success: (solution[0].length > 0) }); // Return response to index.js
+      sendResponse({ success: (solution.length > 0) }); // Return response to index.js
 
     } catch (error) {
       console.error('Error in getting elements:', error);

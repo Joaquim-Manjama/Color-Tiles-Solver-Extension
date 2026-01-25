@@ -34,7 +34,7 @@ const solvePuzzle = () => {
                 board.push(69);
                 continue;
             }
-            
+
             const label = classifyColor(sampled);
             pixels.push(label);
             board.push(getColourId(label));
@@ -53,6 +53,6 @@ const solvePuzzle = () => {
     } catch (error) {
         console.error("Error solving the puzzle! :(", error);
     }
-    
-    return [solution, pixels];
+
+    return solution.toString().replaceAll(",", ", ");
 }
