@@ -20,3 +20,30 @@ Color Tiles is a puzzle game available on Google Search where you must match all
 
 1. Clone this repository:
 ```bash
+   git clone https://github.com/Joaquim-Manjama/Color-Tiles-Solver-Extension.git
+   cd color-tiles-solver
+```
+
+2. Open Chrome and navigate to `chrome://extensions/`
+
+3. Enable **Developer mode** (toggle in top-right corner)
+
+4. Click **Load unpacked**
+
+5. Select the extension folder
+
+6. The Color Tiles Solver icon should now appear in your extensions toolbar
+
+## 📖 Usage
+
+1. Open the Color Tiles game:
+   - Search "color tiles" on Google, OR
+   - Go directly to: https://dailygames.discover.google.com/games/color-tiles
+
+2. Click the extension icon in your toolbar
+
+3. Click **"Solve Current Puzzle"**
+
+4. The solution will appear showing the sequence of moves needed
+
+5. Execute the moves in the game to win!
