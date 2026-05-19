@@ -1,6 +1,6 @@
 # Color Tiles Solver - Chrome Extension
 
-A Chrome extension that automatically solves Google's Color Tiles puzzle game using a breadth-first search algorithm.
+A Chrome extension that calculates the solutions for Google's Color Tiles puzzle game using a breadth-first search algorithm.
 
 ## 🎮 What is Color Tiles?
 
